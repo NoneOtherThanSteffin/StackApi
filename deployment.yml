@@ -32,4 +32,4 @@ spec:
               memory: 1000Mi
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value:  default
+              value:  mysql
