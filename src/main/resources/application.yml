@@ -1,0 +1,74 @@
+server:
+  servlet:
+    context-path: /api
+
+stack:
+  max:
+    capacity: 5
+
+---
+spring:
+  profiles:
+    - default
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: password
+    url: jdbc:mysql://mysql:3306/stack?createDatabaseIfNotExist=true
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+---
+spring:
+  profiles:
+    - mysql
+  hibernate:
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: password
+    url: jdbc:mysql://mysql:3306/stack?createDatabaseIfNotExist=true
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+---
+spring:
+  profiles:
+    - postgres
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://postgres:5432/postgres?createDatabaseIfNotExist=true
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
+---
+spring:
+  profiles:
+    - test
+  hibernate:
+    ddl-auto: update
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1

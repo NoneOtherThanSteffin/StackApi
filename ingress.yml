@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ${APP_API_NAME}
+  namespace: ${K8S_NAMESPACE}
+spec:
+  tls:
+  - hosts: 
+    - ${APP_API_NAME}.${APP_BASE_DNS}
+    secretName: ${K8S_NAMESPACE}-tls-cert
+  rules:
+  - host: ${APP_API_NAME}.${APP_BASE_DNS}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ${APP_API_NAME}
+          servicePort: 8080
